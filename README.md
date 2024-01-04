@@ -1,46 +1,123 @@
-# Getting Started with Create React App
+# set up for typescript
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- npx create-react-app react-typescript --template typescript
 
-## Available Scripts
+# types or interfaces?
 
-In the project directory, you can run:
+- use types when building interfaces and use interfaces when building libraries.
 
-### `npm start`
+# Passing Props as string:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Greet component
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Passing Props as object:
 
-### `npm test`
+- Person component
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Passing Props as array of objects:
 
-### `npm run build`
+- PersonList component
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Passing Props as condition:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Status component
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Passing Props as children prop:
 
-### `npm run eject`
+- Heading component
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Passing React component as a children prop:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Oscar component
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Typing a click event as a component prop
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Button component
 
-## Learn More
+# Typing an onchange event in an input element
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Input component
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# type styles as prop
+
+- Container component
+
+# Prop types and tips:
+
+1.  You can destructure props also.
+
+- Input component
+
+2. Exporting types: In all our files, we have defined type at top, this works for simple components, However for large components with multiple types, try to move that type into a seperate file and import them when necessary.
+
+- Person component
+
+Make a file named Person.types.ts
+export type PersonProps = {
+name: {
+first: string;
+last: string;
+};
+};
+
+now import this file into Person component
+
+3. Reusing types:
+
+- Person component && PersonList component
+
+# Usestate:
+
+- Typescript is smart enough to infer what the state variable type is based on the initial value we pass in. When we passed in false as initial value, typescript inferred that isLoggedIn is always of type boolean which in turn infers that only boolean values can be passed in as an argument to the setter function.
+
+- LoggedIn component inside state folder
+
+# Usestate: when initial value is not initially known and will be known in future point of time
+
+- type AuthUser = {
+  name: string;
+  email: string;
+  };
+
+- const [user, setUser] = useState<AuthUser | null>(null);
+
+  // We are informing typescript that type of user can be null or AuthUser.
+
+  When we do specify null as one of the possible value, we always have to make a check in our code that user is not null before accessing the properties.
+
+  <div>User name is {user?.name}</div>
+
+  # Usestate: type asertion:
+
+- We are telling typescript that null will also have the type as AuthUser.
+
+const [user, setUser] = useState<AuthUser>({} as AuthUser);
+
+# UseReducer hook:
+
+- type for state && action
+- Counter component inside state folder
+
+# UseReducer hook: Discriminated Unions: Recommended approach for typing reducer function
+
+- type CounterState = {
+  count: number;
+  };
+
+type UpdateAction = {
+type: "increment" | "decrement";
+payload: number;
+};
+
+type ResetAction = {
+type: "reset";
+};
+
+- Counter component
+
+# UseContext hook
+
+- Box component
+- ThemeContext component
+- theme.ts
+- All are inside context folder
