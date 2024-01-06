@@ -121,3 +121,73 @@ type: "reset";
 - ThemeContext component
 - theme.ts
 - All are inside context folder
+
+# UseRef hook
+
+- For DomReference specify the DOM reference type.
+- DomRef component inside ref folder
+
+- For MutableReference specify the appropriate type
+- MutableRef component
+
+# If you have to pass in a component prop, use React.ComponentType, if that component accepts props then specify the props type in angle bracket.
+
+- auth folder
+
+# Generic Props:
+
+- Here we have assigned the value of items to be string array, but in future we may pass number array or object array, everytime we are not going to change the type like this:
+
+type ListProps = {
+items: string[] | number [];
+onClick: (value: string | number) => void;
+};
+
+- To overcome this we use generic <T>
+
+- type ListProps<T> = {
+  items: T[];
+  onClick: (value: T) => void;
+  };
+
+const List = <T extends {}>({ items, onClick }: ListProps<T>) => {
+return (
+
+<div>
+<h2> List of items</h2>
+{items.map((item, index) => {
+return (
+<div key={index} onClick = {() => onClick(item)}>{item}</div>
+)
+})}
+</div>
+);
+};
+
+export default List;
+
+# Restricting Props: using never type
+
+# Template literal type
+
+- Position prop can be one of
+  left-center | left-top | left-bottom | center | center-top | center-bottom | right-center| right-top | right-bottom
+
+  - Position can also be center-center: For this Exclude keyword is used.
+
+# Wrapping html element:
+
+-
+- omit takes an object type and removes the specified properties.
+
+# Extracting a Components Prop Types:
+
+- To extract a component prop type which is based on React.ComponentProps. At some point of time, we might want to reuse a component prop types but you don't have access to the type itself perhaps it is because it is from a library that you don't have access to. In such cases we can extract prop types of an existing component.
+
+- Suppose CustomComponent needs the exact same props as the greet component.
+
+- Although we could export greet props but let's assume we don't have control over it. In this case we can use React.ComponentProps to extract the props of greet component.
+
+# Polymorphic Components:
+
+- Text.tsx component

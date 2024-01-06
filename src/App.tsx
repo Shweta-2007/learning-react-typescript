@@ -15,6 +15,13 @@ import { ThemeContextProvider } from "./components/context/ThemeContext";
 import Box from "./components/context/Box";
 import User2 from "./components/context/User";
 import { UserContextProvider } from "./components/context/UserContext";
+import Private from "./components/auth/Private";
+import Profile from "./components/auth/Profile";
+import List from "./components/generics/List";
+import RandomNumber from "./components/restriction/RandomNumber";
+import Toast from "./components/templateLiterals/Toast";
+import CustomButton from "./components/html/Button";
+import Text from "./components/polymorphic/Text";
 
 function App() {
   const PersonName = {
@@ -78,6 +85,23 @@ function App() {
       <UserContextProvider>
         <User2 />
       </UserContextProvider>
+      <Private isLoggedIn={true} Component={Profile} />
+      <List
+        items={["Batman", "Superman", "Wonder Woman"]}
+        onClick={(item) => console.log(item)}
+      />
+      <RandomNumber value={10} isPositive />
+      <Toast position="center" />
+      <CustomButton variant="primary">Primary Button</CustomButton>
+      <Text as="h1" size="lg">
+        Heading
+      </Text>
+      <Text as="p" size="md">
+        Paragraph
+      </Text>
+      <Text as="label" htmlFor="someId" size="sm" color="secondary">
+        Label
+      </Text>
     </div>
   );
 }
